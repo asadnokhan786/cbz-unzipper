@@ -2,7 +2,7 @@ import sys
 import os
 import pytest
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from driver import unzip, unzip_all
+from unzip import unzip, unzip_all
 
 def test_unzip_simple():
     base_dir = os.path.abspath(os.path.dirname(__file__))
