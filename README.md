@@ -5,9 +5,9 @@
 - cbz-unzipper aims to automate this process of mass conversion of a comic-book/manga library by simply asking the user which folder(s) to detect cbz/rar/zip files from and proceed to unzip them into a new destination folder and cleanup the original folder if the user desires. Listed below is a demonstration of how to use this tool as well as the testing suite guide to check if the tool is working as intended
 
 ## TODO
-- [ ] Create testing suite for basic unzipping functionallity
-- [ ] Implement unzip feature from source folder to a specifed destination folder of cbz/rar/zip format
-- [ ] Create testing suite for safety checks
+- [x] Create testing suite for basic unzipping functionallity
+- [x] Implement unzip feature from source folder to a specifed destination folder of cbz/rar/zip format
+- [x] Create testing suite for safety checks
 - [ ] Implement safety feature to check if enough storage space exists
 - [ ] Implement safety feature in case corrupted zipped files are encountered and contiune to process other files
 - [ ] Implement safety feature for persistence in the event user cancels process or computer crashes. Resulting dest folder should contain only fully unzipped/processed files
