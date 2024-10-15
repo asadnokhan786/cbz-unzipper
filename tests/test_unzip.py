@@ -8,7 +8,7 @@ def test_unzip_simple():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     zip_path = os.path.join(base_dir, 'sample-files/zipped/test.cbz')
     unzip_dir = os.path.join(base_dir, 'sample-files/unzipped')
-    test_file = os.path.join(unzip_dir, 'test.txt')
+    test_file = os.path.join(unzip_dir, 'test/test.txt')
 
     unzip(zip_path, unzip_dir)
     assert os.path.exists(test_file)
@@ -28,10 +28,10 @@ def test_unzip_all_simple():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     zip_path = os.path.join(base_dir, 'sample-files/zipped')
     unzip_dir = os.path.join(base_dir, 'sample-files/unzipped')
-    text_file_1 = os.path.join(unzip_dir, 'test.txt')
-    text_file_2 = os.path.join(unzip_dir, 'text2.txt')
-    text_file_3 = os.path.join(unzip_dir, 'text3.txt')
-    text_file_4 = os.path.join(unzip_dir, 'subdir/text3.txt')
+    text_file_1 = os.path.join(unzip_dir, 'test/test.txt')
+    text_file_2 = os.path.join(unzip_dir, 'test2/text2.txt')
+    text_file_3 = os.path.join(unzip_dir, 'test2/text3.txt')
+    text_file_4 = os.path.join(unzip_dir, 'zipped/subdir/text3.txt')
 
     unzip_all(zip_path, unzip_dir)
 
