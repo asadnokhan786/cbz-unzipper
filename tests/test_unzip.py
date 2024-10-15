@@ -1,6 +1,7 @@
 import sys
 import os
 import pytest
+import shutil
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from unzip import unzip, unzip_all
 
@@ -12,8 +13,9 @@ def test_unzip_simple():
 
     unzip(zip_path, unzip_dir)
     assert os.path.exists(test_file)
-    if os.path.exists(test_file):
-        os.remove(test_file)
+    
+    if os.path.exists(unzip_dir):
+        shutil.rmtree(unzip_dir)
 
 def test_unzip_invalid_src():
     base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -31,7 +33,7 @@ def test_unzip_all_simple():
     text_file_1 = os.path.join(unzip_dir, 'test/test.txt')
     text_file_2 = os.path.join(unzip_dir, 'test2/text2.txt')
     text_file_3 = os.path.join(unzip_dir, 'test2/text3.txt')
-    text_file_4 = os.path.join(unzip_dir, 'zipped/subdir/text3.txt')
+    text_file_4 = os.path.join(unzip_dir, 'subdir/test3/text3.txt')
 
     unzip_all(zip_path, unzip_dir)
 
@@ -40,13 +42,7 @@ def test_unzip_all_simple():
     assert os.path.exists(text_file_3)
     assert os.path.exists(text_file_4)
 
-    if os.path.exists(text_file_1):
-        os.remove(text_file_1)
-    if os.path.exists(text_file_2):
-        os.remove(text_file_2)
-    if os.path.exists(text_file_3):
-        os.remove(text_file_3)
-    if os.path.exists(text_file_4):
-        os.remove(text_file_4)
+    if os.path.exists(unzip_dir):
+        shutil.rmtree(unzip_dir)
 
     

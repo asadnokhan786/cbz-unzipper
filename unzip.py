@@ -12,8 +12,10 @@ def unzip(src, dst):
 
 def unzip_all(src, dst):
     for root, dirs, files in os.walk(src):
+        if root != src:
+            break
         for file in files:
-            file_extension = os.path.splitext(src)[1].lower()
+            file_extension = os.path.splitext(file)[1].lower()
             if file_extension in ['.cbz', '.zip', '.rar']:
                 file_path = os.path.join(root, file)
                 unzip(file_path, dst)
