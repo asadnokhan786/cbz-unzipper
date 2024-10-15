@@ -4,10 +4,11 @@ from unzip import unzip_all
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='cbz-unzipper-cli',
-                                     description='cbz-unzipper cli')
-    parser.add_argument('--src', type=str, help='Source file path')
-    parser.add_argument('--dst', type=str, help='Destination file path')
+    parser = argparse.ArgumentParser(prog='cbz-unzipper CLI',
+                                     description='cbz-unzipper CLI is a command line interface program implemented in python\
+                                                  aimed at unzipping/zipping files in mass safely and reliably to the user\'s specific needs')
+    parser.add_argument('--src', '-s', required='true', type=str, help='Source file path, required')
+    parser.add_argument('--dst', '-d', required='true', type=str, help='Destination file path, required')
 
     args = parser.parse_args()
 
