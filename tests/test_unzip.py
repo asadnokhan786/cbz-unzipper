@@ -21,10 +21,19 @@ def test_unzip_invalid_src():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     zip_path = os.path.join(base_dir, 'sample-files/zipped/invalid.zip')
     unzip_dir = os.path.join(base_dir, 'sample-files/unzipped')
-    test_file = os.path.join(unzip_dir, 'test.txt')
 
     with pytest.raises(FileNotFoundError):
         unzip(zip_path, unzip_dir)
+
+def test_unzip_non_zip_file():
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    zip_path = os.path.join(base_dir, 'sample-files/zipped/not-a-zip.txt')
+    unzip_dir = os.path.join(base_dir, 'sample-files/unzipped')
+
+    with pytest.raises(Exception):
+        unzip(zip_path, unzip_dir)
+    
+
 
 def test_unzip_all_simple():
     base_dir = os.path.abspath(os.path.dirname(__file__))
