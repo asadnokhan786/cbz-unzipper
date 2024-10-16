@@ -1,6 +1,7 @@
 import sys
 import os
 import pytest
+import shutil
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from zip import zip, zip_all
 from unzip import unzip, unzip_all
@@ -35,12 +36,12 @@ def test_zip_valid_file_zipping():
 
     if os.path.exists(test_zip):
         test_zip_unzip_dir = os.path.join(zip_dir, 'unzipped-files-2-unzipped')
-        unzip_all(test_zip, test_zip_unzip_dir)
-        should_not_zip_file = os.path.join(test_zip_unzip_dir, '004.txt')
+        unzip(test_zip, test_zip_unzip_dir)
+        should_not_zip_file = os.path.join(test_zip_unzip_dir, 'unzipped-files-2/004.txt')
         assert(not os.path.exists(should_not_zip_file))
 
     if os.path.exists(zip_dir):
-        os.remove(zip_dir)
+        shutil.rmtree(zip_dir)
     
 
 def test_zip_invalid_path():
