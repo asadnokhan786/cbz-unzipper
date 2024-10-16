@@ -15,7 +15,8 @@ def zip(unzip_dir, zip_dir):
     files = [entry for entry in entries if os.path.isfile(os.path.join(unzip_dir, entry))]
     with zipfile.ZipFile(zip_path, 'x') as zip_file:
         for file in files:
-            if is_valid_image(file):
+            full_path = os.path.join(unzip_dir, file)
+            if is_valid_image(full_path):
                 full_path = os.path.join(unzip_dir, file)
                 zip_file.write(full_path, os.path.basename(file))
 
