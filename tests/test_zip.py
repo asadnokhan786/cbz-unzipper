@@ -3,6 +3,7 @@ import os
 import pytest
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from zip import zip, zip_all
+from unzip import unzip, unzip_all
 
 
 def test_zip_simple():
@@ -20,7 +21,29 @@ def test_zip_simple():
     if os.path.exists(test_zip):
         os.remove(test_zip)
 
-def test_zip_invalid():
+def test_zip_valid_file_zipping():
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    zip_dir = os.path.join(base_dir, 'sample-zips/zipped/more-unzipped')
+    unzip_dir = os.path.join(base_dir, 'sample-zips/unzipped/more-unzipped/unzipped-files-2')
+
+    
+    test_zip = os.path.join(zip_dir, 'unzipped-files-2.cbz')
+
+    zip(unzip_dir, zip_dir)
+
+    assert(os.path.exists(test_zip))
+
+    if os.path.exists(test_zip):
+        test_zip_unzip_dir = os.path.join(zip_dir, 'unzipped-files-2-unzipped')
+        unzip_all(test_zip, test_zip_unzip_dir)
+        should_not_zip_file = os.path.join(test_zip_unzip_dir, '004.txt')
+        assert(not os.path.exists(should_not_zip_file))
+
+    if os.path.exists(zip_dir):
+        os.remove(zip_dir)
+    
+
+def test_zip_invalid_path():
     base_dir = os.path.abspath(os.path.dirname(__file__))
     zip_dir = os.path.join(base_dir, 'sample-zips/zipped')
     unzip_dir = os.path.join(base_dir, 'sample-zips/unzipped-invalid')

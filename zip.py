@@ -1,6 +1,7 @@
 import os
 import sys
 import zipfile
+import imghdr
 
 
 def zip(unzip_dir, zip_dir):
