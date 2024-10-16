@@ -60,16 +60,14 @@ def test_zip_all_simple():
 
     
     test_zip = os.path.join(zip_dir, 'unzipped-files.cbz')
-    test_zip_2 = os.path.join(zip_dir, 'unzipped-files-2.cbz')
+    test_zip_2 = os.path.join(zip_dir, 'more-unzipped/unzipped-files-2.cbz')
+    test_zip_3 = os.path.join(zip_dir, 'more-unzipped/unzipped-files-3.cbz')
 
-    zip(unzip_dir, zip_dir)
+    zip_all(unzip_dir, zip_dir)
 
     assert(os.path.exists(test_zip))
-
-    if os.path.exists(test_zip):
-        os.remove(test_zip)
-
     assert(os.path.exists(test_zip_2))
+    assert(os.path.exists(test_zip_3))
 
     if os.path.exists(test_zip_2):
-        os.remove(test_zip_2)
+        shutil.rmtree(zip_dir)
