@@ -21,8 +21,12 @@ def zip(unzip_dir, zip_dir):
                 zip_file.write(full_path, os.path.basename(file))
 
 
-def zip_all(src, dst):
-    pass
+def zip_all(unzip_dir, zip_dir):
+    base_folder_name = os.path.basename(unzip_dir.rstrip('/'))
+
+    entries = os.listdir(unzip_dir)
+    files = [entry for entry in entries if os.path.isfilse(os.path.join(unzip_dir, entry))]
+    directories = [entry for entry in entries if os.path.isdir(os.path.join(unzip_dir, entry))]
 
 
 def is_valid_image(file_path):
