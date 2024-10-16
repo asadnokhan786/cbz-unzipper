@@ -16,8 +16,9 @@
 - [x] Create testing suite for safety checks
 - [x] Implement basic cli
 - [x] Test basic cli
-- [ ] Create tests for zipping feature (default cbz)
+- [x] Create tests for zipping feature (default cbz)
 - [ ] Implement zipping feature
+- [ ] Replace os.walk() with os.listdir() for more efficient zip_all algorithm
 - [ ] Implement logging feature
 - [ ] Test "remember" file creation
 - [ ] Implement "remember" file creation

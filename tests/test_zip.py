@@ -7,7 +7,7 @@ from zip import zip, zip_all
 
 def test_zip_simple():
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    zip_dir = os.path.join(base_dir, 'sample-zips/zipped')
+    zip_dir = os.path.join(base_dir, 'sample-zips/zipped/unzipped-files')
     unzip_dir = os.path.join(base_dir, 'sample-zips/unzipped/unzipped-files')
 
     
