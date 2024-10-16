@@ -8,9 +8,11 @@ def zip(unzip_dir, zip_dir):
     zip_filename = f"{base_folder_name}.cbz"
     zip_path = os.path.join(zip_dir, zip_filename)
 
+
+    os.makedirs(zip_dir, exist_ok=True)
     entries = os.listdir(unzip_dir)
     files = [entry for entry in entries if os.path.isfile(os.path.join(unzip_dir, entry))]
-    with zipfile.ZipFile(zip_path, 'w') as zip_file:
+    with zipfile.ZipFile(zip_path, 'x') as zip_file:
         for file in files:
             full_path = os.path.join(unzip_dir, file)
             zip_file.write(full_path, os.path.basename(file))
