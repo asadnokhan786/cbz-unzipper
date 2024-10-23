@@ -11,7 +11,6 @@ def zip(unzip_dir, zip_dir):
     zip_filename = f"{base_folder_name}.cbz"
     zip_path = os.path.join(zip_dir, zip_filename)
 
-
     os.makedirs(zip_dir, exist_ok=True)
     entries = os.listdir(unzip_dir)
     files = [entry for entry in entries if os.path.isfile(os.path.join(unzip_dir, entry))]
@@ -23,10 +22,17 @@ def zip(unzip_dir, zip_dir):
                 zip_file.write(full_path, os.path.basename(file))
 
 
-# Zips all directories from src to dst recursively
-# Folder is deemed "zippable" if it contains at least one valid image file
-def zip_all(src, dst):
-    pass
+# If a valid file is found in a directory, the entire directory is zipped
+def zip_all(unzip_dir, zip_dir):
+    entries = os.listdir(unzip_dir)
+    files = [entry for entry in entries if os.path.isfile(os.path.join(unzip_dir, entry))]
+    updated_files = valid_files(files, unzip_dir)
+    directories = [entry for entry in entries if os.path.isdir(os.path.join(unzip_dir, entry))]
+    if len(updated_files) > 0:
+        zip(unzip_dir, zip_dir)
+    for directory in directories:
+        subdir_unzip = os.path.join(unzip_dir, directory)
+        zip_all(subdir_unzip, zip_dir)
 
 
 # Determines if a given file is a valid image file
@@ -34,3 +40,11 @@ def is_valid_image(file_path):
     valid_formats = {'jpeg', 'png', 'webp', 'bmp', 'gif', 'tiff'}
     image_type = imghdr.what(file_path)
     return image_type in valid_formats
+
+def valid_files(files, unzip_dir):
+    updated_files = []
+    for file in files:
+        full_path = os.path.join(unzip_dir, file)
+        if is_valid_image(full_path):
+            updated_files.append(full_path)
+    return updated_files
