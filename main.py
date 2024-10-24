@@ -32,6 +32,8 @@ def main():
     if mode == 'zip':
         logger.debug('Running zip_all from main')
         zip_all(src, dst)
+    
+    logger.debug("Task finished, closing program now")
 
 
 if __name__ == '__main__':

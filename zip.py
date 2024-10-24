@@ -2,6 +2,7 @@ import os
 import sys
 import zipfile
 import imghdr
+from logger import logger
 
 
 # Zips a directory from unzip_dir to zip_dir with a filename that is the same as the folder name of unzip_dir
