@@ -10,7 +10,7 @@ def unzip(src, dst):
     file_name = os.path.splitext(file_name_with_ext)[0]
     dst_path = os.path.join(dst, file_name)
 
-    if src.startswith("._"):
+    if os.path.basename(src).startswith("._"):
         logger.debug(f"Found a mac os bullshit zip file that we just gonan ignore at {src}")
         return
 
