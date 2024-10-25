@@ -15,19 +15,21 @@ def unzip(src, dst):
         logger.debug(f"Succesfully unzipped contents of {src} to {dst_path}")
 
 # Unzips all files from src to dst recursively
-def unzip_all(src, dst):
+def unzip_all(zip_dir, unzip_dir):
     logger.debug("Running unzip all")
-    for root, dirs, files in os.walk(src):
-        if root != src:
-            break
-        for file in files:
-            file_extension = os.path.splitext(file)[1].lower()
-            if file_extension in ['.cbz', '.zip', '.rar']:
-                file_path = os.path.join(root, file)
-                logger.debug(f"Now running unzip on {file_path} to {dst}")
-                unzip(file_path, dst)
-        for sub_dir in dirs:
-            subdir_src = os.path.join(root, sub_dir)
-            subdir_dst = os.path.join(dst, sub_dir)
-            logger.debug(f"Now recursively running unzip_all on {subdir_src} to {subdir_dst}")
-            unzip_all(subdir_src, subdir_dst)
+    entries = os.listdir(zip_dir)
+    directories = [entry for entry in entries if os.path.isdir(os.path.join(zip_dir, entry))]
+    files = [entry for entry in entries if os.path.isfile(os.path.join(zip_dir, entry))]
+
+    for file in files:
+        file_extension = os.path.splitext(file)[1].lower()
+        if file_extension in ['.cbz', '.zip', '.rar']:
+            file_path = os.path.join(zip_dir, file)
+            logger.debug(f"Now running unzip on {file_path} to {unzip_dir}")
+            unzip(file_path, unzip_dir)
+
+    for subdir in directories:
+        subdir_zip = os.path.join(zip_dir, subdir)
+        subdir_unzip = os.path.join(unzip_dir, subdir)
+        logger.debug(f"Now recursively running unzip_all on {subdir_zip} to {subdir_unzip}")
+        unzip_all(subdir_zip, subdir_unzip)

@@ -18,8 +18,8 @@
 - [x] Test basic cli
 - [x] Create tests for zipping feature (default cbz)
 - [x] Implement zipping feature
-- [ ] Replace os.walk() with os.listdir() for more efficient zip_all algorithm
-- [ ] Implement logging feature
+- [x] Replace os.walk() with os.listdir() for more efficient zip_all algorithm
+- [x] Implement logging feature
 - [ ] Test "remember" file creation
 - [ ] Implement "remember" file creation
 - [ ] Test command flags for advanced customizations
