@@ -6,13 +6,23 @@ from logger import logger
 
 # Unzips a file from src to dst with a folder name of the file name from src
 def unzip(src, dst):
-    with zipfile.ZipFile(src, 'r') as zip_ref:
-        file_name_with_ext = os.path.basename(src)
-        file_name = os.path.splitext(file_name_with_ext)[0]
-        dst_path = os.path.join(dst, file_name)
+    file_name_with_ext = os.path.basename(src)
+    file_name = os.path.splitext(file_name_with_ext)[0]
+    dst_path = os.path.join(dst, file_name)
+
+    # Check if the destination directory exists
+    if os.path.exists(dst_path):
+        logger.debug(f"Destination directory {dst_path} already exists. Skipping unzipping.")
+    else:
         logger.debug(f"Unzipping contents of {src} to {dst_path}")
-        zip_ref.extractall(dst_path)
-        logger.debug(f"Succesfully unzipped contents of {src} to {dst_path}")
+        os.makedirs(dst_path, exist_ok=True)
+
+        with zipfile.ZipFile(src, 'r') as zip_ref:
+            try:
+                zip_ref.extractall(dst_path)
+                logger.debug(f"Successfully unzipped contents of {src} to {dst_path}")
+            except Exception as e:
+                logger.error(f"Error unzipping {src}: {e}")
 
 # Unzips all files from src to dst recursively
 def unzip_all(zip_dir, unzip_dir):
