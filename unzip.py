@@ -16,7 +16,10 @@ def unzip(src, dst):
     else:
         logger.debug(f"Unzipping contents of {src} to {dst_path}")
         os.makedirs(dst_path, exist_ok=True)
-
+        
+        if os.path.exists(src) == False:
+            logger.error(f"The file: {src} does not appear to exist, exiting unzipping process now")
+            return
         with zipfile.ZipFile(src, 'r') as zip_ref:
             try:
                 zip_ref.extractall(dst_path)
