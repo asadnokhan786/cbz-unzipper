@@ -9,7 +9,7 @@ from unzip import unzip, unzip_all
 
 def test_zip_simple():
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    zip_dir = os.path.join(base_dir, 'sample-zips/zipped')
+    zip_dir = os.path.join(base_dir, 'sample-zips/zipped/unzipped-files')
     unzip_dir = os.path.join(base_dir, 'sample-zips/unzipped/unzipped-files')
 
     
@@ -24,7 +24,7 @@ def test_zip_simple():
 
 def test_zip_valid_file_zipping():
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    zip_dir = os.path.join(base_dir, 'sample-zips/zipped/more-unzipped')
+    zip_dir = os.path.join(base_dir, 'sample-zips/zipped/more-unzipped/unzipped-files-2')
     unzip_dir = os.path.join(base_dir, 'sample-zips/unzipped/more-unzipped/unzipped-files-2')
 
     
@@ -61,12 +61,13 @@ def test_zip_all_simple():
     
     test_zip = os.path.join(zip_dir, 'unzipped-files.cbz')
     test_zip_2 = os.path.join(zip_dir, 'unzipped-files-2.cbz')
+    test_zip_3 = os.path.join(zip_dir, 'more-unzipped/unzipped-files-2.cbz')
 
     zip_all(unzip_dir, zip_dir)
 
     assert(os.path.exists(test_zip))
-
     assert(os.path.exists(test_zip_2))
+    assert(os.path.exists(test_zip_3))
 
     if os.path.exists(zip_dir):
         shutil.rmtree(zip_dir)
